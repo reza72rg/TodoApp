@@ -1,8 +1,13 @@
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 
 urlpatterns = [
+    # Admin site URL
     path('admin/', admin.site.urls),
-    path('accounts/',include('accounts.urls')),
-    path("",include("todo.urls")),
+    
+    # URLs for the accounts app
+    path('accounts/', include('accounts.urls')),
+    
+    # URLs for the todo app
+    path("", include("todo.urls")),
 ]

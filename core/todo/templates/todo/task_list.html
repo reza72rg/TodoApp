@@ -69,7 +69,6 @@
               <td>{{ task.status  }}</td>
               <td>
                 <a class="btn btn-danger" href="{% url 'todo:delete_task' task.id %}"> Delete</a>
-
                 <a class="btn btn-success" href="{% url 'todo:complete_task' task.id %}" >Done </a>
                 <a class="btn btn-success" href="{% url 'todo:update_task' task.id %}" >Edit </a>
               </td>
