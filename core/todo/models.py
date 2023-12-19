@@ -9,9 +9,9 @@ class Task(models.Model):
     
     # Title field for the task
     title = models.CharField(max_length=200)
-    
+    description = models.TextField()
     # Status field to indicate if the task is complete or not
-    status = models.BooleanField(default=False)
+    status =  models.ForeignKey('Status',on_delete=models.SET_NULL,null=True, blank=True)
     
     # Created date field to store the date and time of task creation
     created_date = models.DateTimeField(auto_now_add=True)
@@ -25,3 +25,10 @@ class Task(models.Model):
     class Meta:
         # Specify the order of tasks with respect to the user
         order_with_respect_to = "user"
+        
+        
+class Status(models.Model):
+    name = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.name

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Task</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Update Task</h1>
+    <form method="post" action="{% url 'todo:update_task' task.id %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="taskName">Task Name</label>
+        <input type="text" class="form-control" name="title" value="{{task.title}}" placeholder="Enter task name">
+      </div>
+      <div class="form-group">
+        <label for="taskDescription">Task Description</label>
+        <textarea class="form-control" name="description" rows="3" >{{task.description}}</textarea>
+      </div>
+      <div class="form-group">
+        <label  id="status">Task Status</label>
+        <select class="form-control" name="status">
+          {% for obj in tasks %}
+          {% if obj.id == task.status_id %}
+          <option value="{{obj.id}}" name="status" selected >{{obj.name}}</option>
+          {% else %}
+          <option value="{{obj.id}}" name="status" >{{obj.name}}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Task</button>
+    </form>
+  </div>
+</body>
+</html>

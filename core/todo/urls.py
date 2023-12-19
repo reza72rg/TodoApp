@@ -14,9 +14,9 @@ urlpatterns = [
     # Task delete view
     path("delete/<int:pk>/", DeleteView.as_view(), name="delete_task"),
 
-    # Task complete view
-    path("done/<int:pk>/", TaskComplete.as_view(), name="complete_task"),
-
+    # Task done view
+    path("done/<int:pk>/", TaskDone.as_view(), name="done_task"),
+    
     # Task update view
     path("edit/<int:pk>/", TaskUpdate.as_view(), name="update_task"),
 ]
