@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from .pagination import CustomPagination
 
 class TaskListViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
@@ -19,7 +20,7 @@ class TaskListViewSet(viewsets.ModelViewSet):
     }
     search_fields = ['=title', 'description']
     ordering_fields = ['created_date']
- 
+    pagination_class = CustomPagination
 
 class StatusListModuleSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated]
