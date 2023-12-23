@@ -27,7 +27,6 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        print(form)
         return super(TaskCreate, self).form_valid(form)
  
     def get_context_data(self, **kwargs):

@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Tasks</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
-    <h1>User Actions</h1>
-    {% if user.is_authenticated %}
-      <p>Welcome, {{ user.email }}!</p>
-      <a href="{% url 'accounts:logout' %}"><button class="btn btn-primary">Logout</button></a>
-    {% else %}
-      <a href="{% url 'accounts:login' %}"><button class="btn btn-primary">Login</button></a>
-      <a href="{% url 'accounts:register' %}"><button class="btn btn-primary">Register</button></a>
-    {% endif %}
-  </div>
-  <div class="container">
+{% extends 'base.html' %}
+
+{% block title %} Todo List {% endblock %}
+
+
+{% block content %}
+  <div class="container mt-4">
     <h1>Add Task</h1>
     <form method="post" action="{% url 'todo:create_task' %}">
       {% csrf_token %}
@@ -25,7 +12,7 @@
     </form>
   </div>
   
-  <div class="container">
+  <div class="container mt-4">
     <h1>My Tasks</h1>
     <table class="table">
       <thead>
@@ -39,8 +26,14 @@
       <tbody>
         {% for task in tasks %}
         <tr>
+          {% if task.status.name == 'Completed' %}
+          <td><strike>{{task.title}}</strike></td>
+          <td><strike>{{task.description}}</strike></td>
+          {% else %}
           <td>{{task.title}}</td>
           <td>{{task.description}}</td>
+          {% endif %}
+          
           <td>{{task.status}}</td>
           <td>
             <a href="{% url 'todo:update_task' task.id %}"><button class="btn btn-primary">Edit</button></a>
@@ -52,5 +45,4 @@
       </tbody>
     </table>
   </div>
-</body>
-</html>
+  {% endblock %}

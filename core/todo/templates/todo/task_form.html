@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Task</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
+{% extends 'base.html' %}
+
+{% block title %} Create Task {% endblock %}
+
+
+{% block content %}
+  <div class="container mt-4">
     <h1>Create Task</h1>
     <form method="post" action="{% url 'todo:create_task' %}">
       {% csrf_token %}
@@ -31,5 +28,4 @@
       <button type="submit" class="btn btn-primary">Create Task</button>
     </form>
   </div>
-</body>
-</html>
+  {% endblock %}
