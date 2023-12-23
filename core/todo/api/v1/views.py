@@ -4,11 +4,21 @@ from todo.models import Task, Status
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class TaskListViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
     serializer_class = Taskserializers
     queryset = Task.objects.all()
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = {
+        "author": ["exact","in"],
+        "status": ["exact","in"],
+  
+    }
+    search_fields = ['=title', 'description']
+    ordering_fields = ['created_date']
  
 
 class StatusListModuleSet(viewsets.ModelViewSet):
