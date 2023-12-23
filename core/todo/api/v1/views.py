@@ -5,12 +5,12 @@ from todo.models import Task
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
-
+from .permissions import IsOwnerOrReadOnly
 
 
 
 class TaskListViewSet(viewsets.ViewSet):
-    permission_classes =[IsAuthenticated]
+    permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
     serializer_class = Taskserializers
     queryset = Task.objects.all()
     
