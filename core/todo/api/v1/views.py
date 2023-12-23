@@ -6,11 +6,15 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
+from accounts.models import Profile 
 
-
-
-class TaskListViewSet(viewsets.ViewSet):
+class TaskListViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
+    serializer_class = Taskserializers
+    queryset = Task.objects.all()
+ 
+'''class TaskListViewSet(viewsets.ViewSet):
+    permission_classes =[IsAuthenticated]
     serializer_class = Taskserializers
     queryset = Task.objects.all()
     
@@ -42,3 +46,4 @@ class TaskListViewSet(viewsets.ViewSet):
         task_object = get_object_or_404(self.queryset, pk=pk)
         task_object.delete()
         return Response({'detail':"Item removed successfully"},status=status.HTTP_204_NO_CONTENT) 
+    '''

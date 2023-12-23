@@ -3,10 +3,9 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
-from todo.forms import TaskForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from todo.models import Task,Status
-from django.views import View
+
 
 # Task List View
 class Tasklist(LoginRequiredMixin, ListView):
@@ -15,7 +14,7 @@ class Tasklist(LoginRequiredMixin, ListView):
     template_name = "todo/list_task.html"
 
     def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+        return self.model.objects.filter(author=self.request.user.id)
 
 
 # Task Create View
@@ -26,7 +25,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author_id = self.request.user.id
         return super(TaskCreate, self).form_valid(form)
  
     def get_context_data(self, **kwargs):
