@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from todo.models import Task,Status
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Task List View
 class Tasklist(LoginRequiredMixin, ListView):
@@ -15,7 +15,6 @@ class Tasklist(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(author=self.request.user.id)
-
 
 # Task Create View
 class TaskCreate(LoginRequiredMixin, CreateView):

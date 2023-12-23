@@ -17,15 +17,15 @@ class Task(models.Model):
     
     # Updated date field to store the date and time of task update
     updated_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
-    
-    def get_absolute_api_url(self):
-        return reverse("todo:api-v1:task-list",kwargs={"pk":self.pk})
     class Meta:
         # Specify the order of tasks with respect to the user
         order_with_respect_to = "author"
+    def __str__(self):
+        return self.title
+   
+    def get_snippet(self):
+        return self.description[0:5]
+
         
         
 class Status(models.Model):

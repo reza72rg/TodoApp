@@ -8,6 +8,7 @@ urlpatterns = [
     # Task list view
     path("", Tasklist.as_view(), name="task_list"),
 
+
     # Task create view
     path("create/", TaskCreate.as_view(), name="create_task"),
 
