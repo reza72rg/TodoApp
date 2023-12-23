@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from todo.views import *
 
 # Set the app name for namespacing
@@ -19,4 +19,6 @@ urlpatterns = [
     
     # Task update view
     path("edit/<int:pk>/", TaskUpdate.as_view(), name="update_task"),
+    
+    path("api/v1/",include('todo.api.v1.urls'))
 ]
