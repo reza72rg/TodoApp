@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from todo.models import Task, Status
 from accounts.models import Profile, User
-       
+
+class Statusserializers(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ["id","name"] 
+               
 class Taskserializers(serializers.ModelSerializer):
     status = serializers.SlugRelatedField(many=False,slug_field='name',queryset= Status.objects.all())
     class Meta:

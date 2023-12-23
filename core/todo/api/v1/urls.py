@@ -6,6 +6,8 @@ app_name = 'api-v1'
 
 urlpatterns = [
     path('task/',TaskListViewSet.as_view({'get':'list','post':'create'}), name ='task-list'),
+    path('status/',StatusListModuleSet.as_view({'get':'list','post':'create'}), name ='status-list'),
     path('task/<int:pk>/',TaskListViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}), name ='task-detail'),
+    path('status/<int:pk>/',StatusListModuleSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}), name ='status-detail'),
     
 ]

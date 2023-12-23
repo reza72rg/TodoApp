@@ -1,18 +1,23 @@
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from .serializers import Taskserializers
-from todo.models import Task
-from rest_framework import status
+from .serializers import Taskserializers, Statusserializers
+from todo.models import Task, Status
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
-from accounts.models import Profile 
 
 class TaskListViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
     serializer_class = Taskserializers
     queryset = Task.objects.all()
  
+
+class StatusListModuleSet(viewsets.ModelViewSet):
+    permission_classes =[IsAuthenticated]
+    serializer_class = Statusserializers
+    queryset = Status.objects.all()
+    
+
+
 '''class TaskListViewSet(viewsets.ViewSet):
     permission_classes =[IsAuthenticated]
     serializer_class = Taskserializers
