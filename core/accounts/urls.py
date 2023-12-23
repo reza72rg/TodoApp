@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CustomLoginView, RegisterPage
+from .views import CustomLoginView,RegisterPage
 from django.contrib.auth.views import LogoutView
 
 # Set the app name for namespacing

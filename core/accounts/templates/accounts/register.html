@@ -48,14 +48,15 @@
 
 <main class="form-signin text-center">
     <form action="{% url 'accounts:register' %}" method="POST">
-        <a href="https://github.com/alibigdeli"><img class="mb-4 rounded-circle border-3 border-white shadow p-1 mb" src="https://icc-aria.ir/static/img/team_11.jpg" alt="" width="150"
+        <a href="https://github.com/reza72rg"><img class="mb-4 rounded-circle border-3 border-white shadow p-1 mb" src="https://icc-aria.ir/static/img/team_11.jpg" alt="" width="150"
             height="150"></a>
         <h1 class="h3 mb-3 fw-normal">Please Register</h1>
         {% csrf_token %}
+        {{ form.errors }}
         <div class="form-floating">
-            <input type="username" name="username" class="form-control" id="floatingInput"
+            <input type="email" name="email" class="form-control" id="floatingInput"
                 placeholder="name@example.com">
-            <label for="floatingInput">Username</label>
+            <label for="floatingInput">Email</label>
         </div>
         <div class="form-floating">
             <input type="password" name="password1" class="form-control mb-0" id="floatingPassword"

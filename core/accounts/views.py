@@ -1,9 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
-from django.views.generic.edit import FormView
+from django.http.response import HttpResponse as HttpResponse
+from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.shortcuts import redirect
+from accounts.forms import UserCreationForm
+from django.views.generic.edit import CreateView
 
 # Custom Login View
 class CustomLoginView(LoginView):
@@ -12,10 +15,9 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True  # Redirect to success URL if user is already authenticated
 
     def get_success_url(self):
-        return reverse_lazy("todo:task_list")  # Redirect to the task list page after successful login
-
-# Register Page View
-class RegisterPage(FormView):
+        return reverse_lazy("todo:task_list")
+    
+class RegisterPage(CreateView):
     template_name = "accounts/register.html"  # Template for the registration page
     form_class = UserCreationForm  # Form class for user registration
     redirect_authenticated_user = True  # Redirect to success URL if user is already authenticated

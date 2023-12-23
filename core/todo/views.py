@@ -50,7 +50,7 @@ class TaskDone(LoginRequiredMixin, DetailView):
     def get(self, request, pk):
         task = get_object_or_404(Task, pk=pk)
         if task.status != 'completed':
-            task.status = get_object_or_404(Status, pk=1)
+            task.status = get_object_or_404(Status, name='Completed')
             task.save()
         return redirect('todo:task_list')
 

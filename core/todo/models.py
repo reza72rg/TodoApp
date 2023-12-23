@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
 
+from accounts.models import User
 # Create your models here.
 
 class Task(models.Model):
     # ForeignKey relationship with User model
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    
+    #user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('accounts.User',on_delete=models.SET_NULL,null=True, related_name='posts_author')
     # Title field for the task
     title = models.CharField(max_length=200)
     description = models.TextField()
