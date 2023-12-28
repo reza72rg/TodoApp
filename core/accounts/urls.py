@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import CustomLoginView,RegisterPage
 from django.contrib.auth.views import LogoutView
 
@@ -14,4 +14,6 @@ urlpatterns = [
     
     # Register view
     path("register/", RegisterPage.as_view(), name="register"),
+    
+    path("api/v1/",include('accounts.api.v1.urls'))
 ]
