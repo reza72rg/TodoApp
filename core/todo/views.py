@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from todo.models import Task,Status
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from rest_framework.authtoken.views import obtain_auth_token
 # Task List View
 class Tasklist(LoginRequiredMixin, ListView):
     model = Task

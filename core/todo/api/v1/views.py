@@ -1,12 +1,14 @@
 from rest_framework.permissions import IsAuthenticated
-from .serializers import Taskserializers, Statusserializers
+from .serializers import Taskserializers, Statusserializers, Usersserializers
 from todo.models import Task, Status
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import CustomPagination
+from accounts.models import User
+
+
 
 class TaskListViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated,IsOwnerOrReadOnly]
@@ -27,10 +29,14 @@ class StatusListModuleSet(viewsets.ModelViewSet):
     serializer_class = Statusserializers
     queryset = Status.objects.all()
     
-
-
-'''class TaskListViewSet(viewsets.ViewSet):
+class UsersListModuleSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated]
+    serializer_class = Usersserializers
+    queryset = User.objects.all()
+
+'''
+class TaskListViewSet(viewsets.ViewSet):
+    #permission_classes =[IsAuthenticated]
     serializer_class = Taskserializers
     queryset = Task.objects.all()
     
@@ -62,4 +68,4 @@ class StatusListModuleSet(viewsets.ModelViewSet):
         task_object = get_object_or_404(self.queryset, pk=pk)
         task_object.delete()
         return Response({'detail':"Item removed successfully"},status=status.HTTP_204_NO_CONTENT) 
-    '''
+'''
