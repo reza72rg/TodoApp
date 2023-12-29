@@ -1,6 +1,7 @@
 from django.urls import path
 #from rest_framework.authtoken.views import obtain_auth_token
-from .views import RegisterApiViews, CustomAuthToken, CustomDiscardAuthToken
+from .views import RegisterApiViews, CustomAuthToken, CustomDiscardAuthToken, \
+    CustomTokenObtainPairView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -15,7 +16,7 @@ urlpatterns = [
     #path('token/login', obtain_auth_token,name="token-login"),
     path('token-custom/login/', CustomAuthToken.as_view(),name="token-login"),
     path('token/logout/', CustomDiscardAuthToken.as_view(),name="token-logout"),
-    path('jwt/create/', TokenObtainPairView.as_view(), name='jwt-create'),
+    path('jwt/create/', CustomTokenObtainPairView.as_view(), name='jwt-create'),
     path('jwt/refresh/', TokenRefreshView.as_view(), name='jwt-refresh'),
     path('jwt/verify/', TokenVerifyView.as_view(), name='jwt-verify'),
 ]
