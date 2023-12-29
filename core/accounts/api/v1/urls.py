@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import * 
-from rest_framework.authtoken import views
-from .views import RegisterApiViews
+#from rest_framework.authtoken.views import obtain_auth_token
+from .views import RegisterApiViews, CustomAuthToken, CustomDiscardAuthToken
 
 app_name = 'api-v1'
 
 urlpatterns = [
     path("register/", RegisterApiViews.as_view(), name="register"),
-    path('api-token/', views.obtain_auth_token),
+    #path('token/login', obtain_auth_token,name="token-login"),
+    path('token-custom/login', CustomAuthToken.as_view(),name="token-login"),
+    path('token/logout', CustomDiscardAuthToken.as_view(),name="token-logout"),
 ]
