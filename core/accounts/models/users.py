@@ -9,7 +9,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)  # Email field for user authentication
     is_staff = models.BooleanField(default=False)  # Boolean field to indicate if user is staff or not
     is_active = models.BooleanField(default=True)  # Boolean field to indicate if user is active or not
-    first_name = models.CharField(max_length=20)  # First name of the user
+    is_verified = models.BooleanField(default=False)
     
     REQUIRED_FIELDS = []  # Required fields for user registration
     USERNAME_FIELD = 'email'  # Field to use for user authentication

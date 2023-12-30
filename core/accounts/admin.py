@@ -5,8 +5,8 @@ from accounts.models import User,Profile
 
 class CustomUserAdmin(BaseUserAdmin):
     model = User
-    list_display = ('email', 'is_staff', 'is_active')
-    list_filter = ('email', 'is_staff', 'is_active')
+    list_display = ('email', 'is_staff', 'is_active','is_verified')
+    list_filter = ('email', 'is_staff', 'is_active','is_verified')
     searching_fileds = ('email',)
     ordering = ('email',)
     fieldsets = (
@@ -15,7 +15,7 @@ class CustomUserAdmin(BaseUserAdmin):
                     ('email', 'password')}),
 		('Permissions', 
                 {'fields':
-                        ('is_active', 'is_staff', 'is_superuser')}),
+                        ('is_active', 'is_staff', 'is_superuser','is_verified')}),
         ('group permissions', 
                 {'fields':
                         ('groups', 'user_permissions')}),
@@ -27,7 +27,7 @@ class CustomUserAdmin(BaseUserAdmin):
     add_fieldsets = (
 		(None, 
             {'fields':
-                ('email', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser')}),
+                ('email', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser','is_verified')}),
 	            )
 
     
