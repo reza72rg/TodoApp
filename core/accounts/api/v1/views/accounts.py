@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import status
-from .serializers import RegisterSerializer, CustomAuthTokenSerializer, CustomTokenObtainPairSerializer, \
-    ChangePasswordSerializer, ProfileSerializers
+from ..serializers import RegisterSerializer, CustomAuthTokenSerializer, CustomTokenObtainPairSerializer, \
+    ChangePasswordSerializer
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -72,14 +72,3 @@ class ChangePasswordApiView(generics.GenericAPIView):
                 return Response({'details':'password was change successfully'},status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-        
-class ProfileApiViews(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = ProfileSerializers
-    queryset = Profile.objects.all()
-
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        object = get_object_or_404(queryset,user=self.request.user)
-        return object
