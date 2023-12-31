@@ -2,7 +2,6 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-![Todo List Program Screenshot](screenshot.png)
 
 This is a Todo List program built with Django, which allows users to record and manage their daily tasks. The program provides a user-friendly interface to prevent forgetting important tasks. It also includes a REST API to retrieve data from the program. The project is Dockerized for easy deployment and management.
 
