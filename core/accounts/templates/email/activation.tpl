@@ -9,5 +9,5 @@ This is a plain text part.
 {% endblock %}
 
 {% block html %}
-{{token}}
+http://127.0.0.1:8000/accounts/api/v1/activation/confirm/{{token}}
 {% endblock %}

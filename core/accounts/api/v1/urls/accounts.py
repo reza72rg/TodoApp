@@ -1,7 +1,7 @@
 from django.urls import path
 #from rest_framework.authtoken.views import obtain_auth_token
 from ..views import RegisterApiViews, CustomAuthToken, CustomDiscardAuthToken, \
-    CustomTokenObtainPairView, ChangePasswordApiView, SendEmail
+    CustomTokenObtainPairView, ChangePasswordApiView, ActivationApiView, ActivationResendApiView #SendEmail
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -13,9 +13,11 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # Registration
     path("register/", RegisterApiViews.as_view(), name="register"),
-    
+    # Activation
+    path('activation/confirm/<str:token>/', ActivationApiView.as_view(),name="activation"),
+    path('activation/resend/', ActivationResendApiView.as_view(),name="activation-resend"),
     # Verify
-    path('send-email',SendEmail.as_view(),name="send-email"),
+    #path('send-email',SendEmail.as_view(),name="send-email"),
     # Change Password
     path("change-password",ChangePasswordApiView.as_view(),name="change-password"),
     

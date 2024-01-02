@@ -15,5 +15,8 @@ urlpatterns = [
     # Register view
     path("register/", RegisterPage.as_view(), name="register"),
     
-    path("api/v1/",include('accounts.api.v1.urls'))
+    path("api/v1/",include('accounts.api.v1.urls')),
+    path("api/v2/",include('djoser.urls')),
+    path("api/v2/",include('djoser.urls.jwt'))
+  
 ]

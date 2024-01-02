@@ -91,3 +91,16 @@ class ChangePasswordSerializer(serializers.Serializer):
             raise serializers.ValidationError({'new_password':list(e.messages)})           
         return super().validate(attrs)
   
+class ActivateResendSerializer(serializers.Serializer):
+    email = serializers.EmailField(required = True)
+    
+    def validate(self, attrs):
+        email = attrs.get('email')
+        try:
+            user_object = User.objects.get(email= email)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'errors':'user does not exist'})
+        if user_object.is_verified:
+             raise serializers.ValidationError({'errors':'user already verified'})
+        attrs['user'] = user_object      
+        return super().validate(attrs)
