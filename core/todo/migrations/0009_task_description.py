@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('todo', '0008_rename_completed_task_status'),
+        ("todo", "0008_rename_completed_task_status"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='task',
-            name='description',
+            model_name="task",
+            name="description",
             field=models.CharField(default=2, max_length=200),
             preserve_default=False,
         ),

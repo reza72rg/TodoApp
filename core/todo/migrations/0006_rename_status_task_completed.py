@@ -4,15 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('todo', '0005_alter_task_status'),
+        ("todo", "0005_alter_task_status"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='task',
-            old_name='status',
-            new_name='completed',
+            model_name="task",
+            old_name="status",
+            new_name="completed",
         ),
     ]

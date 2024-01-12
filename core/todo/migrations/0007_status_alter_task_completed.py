@@ -5,22 +5,33 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('todo', '0006_rename_status_task_completed'),
+        ("todo", "0006_rename_status_task_completed"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Status',
+            name="Status",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
             ],
         ),
         migrations.AlterField(
-            model_name='task',
-            name='completed',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='todo.status'),
+            model_name="task",
+            name="completed",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="todo.status",
+            ),
         ),
     ]
