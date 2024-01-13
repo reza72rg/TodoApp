@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('todo', '0003_remove_task_complete'),
+        ("todo", "0003_remove_task_complete"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='task',
-            name='status',
+            model_name="task",
+            name="status",
             field=models.BooleanField(default=True),
         ),
     ]
