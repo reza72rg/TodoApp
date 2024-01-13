@@ -6,7 +6,13 @@ class Statusserializers(serializers.ModelSerializer):
     class Meta:
         model = Status
         fields = ["id","name"] 
-               
+
+class Usersserializers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id","email"] 
+         
+                   
 class Taskserializers(serializers.ModelSerializer):
    
     absolute_urls = serializers.SerializerMethodField()

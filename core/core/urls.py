@@ -1,6 +1,20 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Snippets API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 urlpatterns = [
     # Admin site URL
     path('admin/', admin.site.urls),
@@ -8,7 +22,7 @@ urlpatterns = [
     # URLs for the accounts app
     path('accounts/', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    # path("accounts/", include("django.contrib.auth.urls")),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # URLs for the todo app
     path("", include("todo.urls")),
 ]

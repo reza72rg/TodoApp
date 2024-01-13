@@ -25,9 +25,8 @@ class Task(models.Model):
    
     def get_snippet(self):
         return self.description[0:5]
+    
 
-        
-        
 class Status(models.Model):
     name = models.CharField(max_length=255)
     
