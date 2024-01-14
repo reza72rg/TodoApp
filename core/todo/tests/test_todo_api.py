@@ -1,0 +1,41 @@
+from django.urls import reverse
+from rest_framework.test import APIClient
+import pytest
+from accounts.models import User
+@pytest.fixture
+def common_user():
+    user = User.objects.create_user(email="testemail@gmail.com", password="123456789ab", is_verified= True)
+    return user
+@pytest.fixture
+def api_client():
+    client = APIClient()
+    return client
+@pytest.fixture
+def common_data(common_user):
+    data = {
+            "author" : common_user,
+            "title":"test",
+            "description":"test",
+            "status":"test",
+        }
+    print('10'*20,data)
+    return data
+@pytest.fixture
+def common_url():
+    url = reverse("todo:api-v1:task-list") 
+    return url       
+@pytest.mark.django_db
+class TestPostApi:
+    def test_get_post_response_200_status(self, api_client, common_url):
+        response = api_client.get(common_url)
+        assert response.status_code == 200
+        
+    def test_create_post_response_401_status(self, api_client, common_data, common_url):
+        response = api_client.post(common_url, common_data)
+        assert response.status_code == 401
+    
+    def test_create_post_response_force_authenticate(self, api_client, common_user, common_data, common_url):
+        api_client.force_login(user=common_user)
+        # api_client.force_authenticate(user= common_user)
+        response = api_client.post(common_url, common_data)
+        assert response.status_code == 401
