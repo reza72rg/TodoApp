@@ -18,7 +18,6 @@ def common_data(common_user):
             "description":"test",
             "status":"test",
         }
-    print('10'*20,data)
     return data
 @pytest.fixture
 def common_url():
@@ -30,12 +29,18 @@ class TestPostApi:
         response = api_client.get(common_url)
         assert response.status_code == 200
         
-    def test_create_post_response_401_status(self, api_client, common_data, common_url):
+    def test_create_post_response_201_status(self, api_client, common_data, common_url):
         response = api_client.post(common_url, common_data)
         assert response.status_code == 401
     
-    def test_create_post_response_force_authenticate(self, api_client, common_user, common_data, common_url):
+    def test_create_post_response_201_status_with_login(self, api_client, common_user, common_data, common_url):
         api_client.force_login(user=common_user)
-        # api_client.force_authenticate(user= common_user)
+        response = api_client.post(common_url, common_data)
+        assert response.status_code == 201
+    
+    def test_create_post_response_force_authenticate(self, api_client, common_user, common_data, common_url):
+        #api_client.force_login(user=common_user)
+        api_client.force_authenticate(user= common_user)
+        #api_client.force_authenticate(user={})
         response = api_client.post(common_url, common_data)
         assert response.status_code == 401
