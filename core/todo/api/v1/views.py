@@ -1,11 +1,11 @@
 from rest_framework.permissions import IsAuthenticated
-from .serializers import Taskserializers, Statusserializers, Usersserializers
-from todo.models import Task, Status
 from rest_framework import viewsets
-from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from todo.models import Task, Status
+from .serializers import Taskserializers, Statusserializers, Usersserializers
 from .pagination import CustomPagination
+from .permissions import IsOwnerOrReadOnly
 from accounts.models import User
 
 

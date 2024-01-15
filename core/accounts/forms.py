@@ -31,7 +31,9 @@ class UserCreationForm(forms.ModelForm):
     # Method to validate password confirmation
     def clean_password2(self):
         cd = self.cleaned_data
-        if cd["password1"] and cd["password2"] and cd["password1"] != cd["password2"]:
+        if (
+            cd["password1"] and cd["password2"] and cd["password1"] != cd["password2"]
+        ):
             raise ValidationError("passwords don't match")
         return cd["password2"]
 
