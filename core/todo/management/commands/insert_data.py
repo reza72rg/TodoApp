@@ -44,7 +44,7 @@ class Command(BaseCommand):
         """
 
         # Create 10 tasks with random titles, descriptions, and a status of "Completed"
-        for _ in range(10):
+        for _ in range(5):
             Task.objects.create(
                 author=profile,
                 title=self.fake.paragraph(nb_sentences=1),
