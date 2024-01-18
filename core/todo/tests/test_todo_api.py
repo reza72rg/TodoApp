@@ -1,6 +1,6 @@
+import pytest
 from django.urls import reverse
 from rest_framework.test import APIClient
-import pytest
 from accounts.models import User
 
 
@@ -57,7 +57,7 @@ class TestPostApi:
     def test_create_post_response_force_authenticate(
         self, api_client, common_user, common_data, common_url
     ):
-        # api_client.force_login(user=common_user)
+        api_client.force_login(user=common_user)
         api_client.force_authenticate(user=common_user)
         # api_client.force_authenticate(user={})
         response = api_client.post(common_url, common_data)
