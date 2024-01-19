@@ -44,5 +44,4 @@ urlpatterns = router.urls
         ),
         name="status-detail",
     ),
-]
-"""
+]"""
