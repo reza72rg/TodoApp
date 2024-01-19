@@ -1,7 +1,8 @@
+import pytest
 from django.urls import reverse
 from rest_framework.test import APIClient
-import pytest
 from accounts.models import User
+from todo.models import Status
 
 
 @pytest.fixture
@@ -13,18 +14,24 @@ def common_user():
 
 
 @pytest.fixture
+def common_status():
+    status = Status.objects.create(name="test")
+    return status
+
+
+@pytest.fixture
 def api_client():
     client = APIClient()
     return client
 
 
 @pytest.fixture
-def common_data(common_user):
+def common_data(common_user, common_status):
     data = {
         "author": common_user,
         "title": "test",
         "description": "test",
-        "status": "test",
+        "status": common_status,
     }
     return data
 
@@ -39,7 +46,7 @@ def common_url():
 class TestPostApi:
     def test_get_post_response_200_status(self, api_client, common_url):
         response = api_client.get(common_url)
-        assert response.status_code == 200
+        assert response.status_code == 401
 
     def test_create_post_response_201_status(
         self, api_client, common_data, common_url
@@ -57,8 +64,6 @@ class TestPostApi:
     def test_create_post_response_force_authenticate(
         self, api_client, common_user, common_data, common_url
     ):
-        # api_client.force_login(user=common_user)
         api_client.force_authenticate(user=common_user)
-        # api_client.force_authenticate(user={})
         response = api_client.post(common_url, common_data)
-        assert response.status_code == 401
+        assert response.status_code == 201
