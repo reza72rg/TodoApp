@@ -29,7 +29,7 @@ class Task(models.Model):
 
     class Meta:
         # Specify the order of tasks with respect to the user
-        order_with_respect_to = "author"
+        order_with_respect_to = "created_date"
 
     def __str__(self):
         return self.title
