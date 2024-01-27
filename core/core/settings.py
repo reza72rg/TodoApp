@@ -143,3 +143,8 @@ EMAIL_HOST = "smtp4dev"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
+
+
+
+# celery configs 
+CELERY_BROKER_URL = "redis://redis:6379/1"
