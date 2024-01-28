@@ -20,9 +20,9 @@ black
 flake8
 pytest
 pytest-django
-python_http_client
 Faker
 
 # Background Process and cash
+
 celery
 redis
