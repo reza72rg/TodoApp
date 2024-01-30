@@ -1,5 +1,5 @@
 from celery import shared_task
-from todo.models import Task
+from todo.models import Task, Status
 import time
 @shared_task
 def Send_email():
@@ -9,5 +9,6 @@ def Send_email():
     
 @shared_task
 def Delete_task_complete():
-    response = Task.objects.filter(status = 3)
+    state = Status.objects.get(name ='Completed') 
+    response = Task.objects.filter(status = state)
     response.delete()
