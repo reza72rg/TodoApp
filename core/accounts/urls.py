@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CustomLoginView, RegisterPage, send_email
+from .views import CustomLoginView, RegisterPage, send_email, test
 from django.contrib.auth.views import LogoutView
 
 # Set the app name for namespacing
@@ -16,5 +16,6 @@ urlpatterns = [
     path("api/v2/", include("djoser.urls")),
     path("api/v2/", include("djoser.urls.jwt")),
     path("send-email/", send_email, name="send_email"),
+    path("test/", test, name="test"),
     
 ]

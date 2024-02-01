@@ -50,9 +50,21 @@ class RegisterPage(CreateView):
             return redirect("todo:task_list")
             # Redirect to the task list page if user is already authenticated
         return super(RegisterPage, self).get(*args, **kwargs)
-from django.http import HttpResponse
-import time
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.cache import cache_page
 from .tasks import Send_email
+from django.core.cache import cache
 def send_email(request):
     Send_email.delay()
     return HttpResponse("<h1>Done Sending</h1>")
+import requests
+'''def test(request):
+    if cache.get("test_delay_api") is None:
+        response = requests.get('https://9b27fe39-f4e4-4740-853a-712190ec90b6.mock.pstmn.io/test/delay5')
+        cache.set("test_delay_api",response.json(),60)
+    return JsonResponse(cache.get("test_delay_api"))'''
+
+@cache_page(60)
+def test(request):
+    response = requests.get('https://9b27fe39-f4e4-4740-853a-712190ec90b6.mock.pstmn.io/test/delay5')
+    return JsonResponse(response.json())
