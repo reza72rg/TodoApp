@@ -22,9 +22,10 @@ pytest
 pytest-django
 Faker
 
-# Background Process and cash
+# Background Process and cache 
 
 celery
 redis
+django-redis
 django-celery-beat
 django-redis

@@ -150,7 +150,7 @@ EMAIL_HOST_PASSWORD = ""
 # celery configs 
 CELERY_BROKER_URL = "redis://redis:6379/1"
 
-# cashing configs
+# caching configs
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",

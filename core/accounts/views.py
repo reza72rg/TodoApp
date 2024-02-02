@@ -50,6 +50,9 @@ class RegisterPage(CreateView):
             return redirect("todo:task_list")
             # Redirect to the task list page if user is already authenticated
         return super(RegisterPage, self).get(*args, **kwargs)
+    
+    
+    
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.cache import cache_page
 from .tasks import Send_email
