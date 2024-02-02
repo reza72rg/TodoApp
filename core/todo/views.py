@@ -7,14 +7,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from todo.models import Task, Status
 import time
 from django.views.decorators.cache import cache_page
-from django.core.cache import cache
 from django.utils.decorators import method_decorator
 
-@method_decorator(cache_page(60*30), name='dispatch')
+
+@method_decorator(cache_page(60 * 30), name="dispatch")
 class Tasklist(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = "tasks"
     template_name = "todo/list_task.html"
+
     def get_queryset(self):
         time.sleep(10)
         return self.model.objects.filter(author=self.request.user.id)
