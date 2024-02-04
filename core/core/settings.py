@@ -17,7 +17,7 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend"]
 
 
 # Application definition
@@ -146,6 +146,16 @@ EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 
 
-
-# celery configs 
+# celery configs
 CELERY_BROKER_URL = "redis://redis:6379/1"
+
+# caching configs
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}

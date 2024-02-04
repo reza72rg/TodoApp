@@ -1,5 +1,10 @@
-# from django.urls import path
-from .views import TaskListViewSet, StatusListModuleSet, UsersListModuleSet
+from django.urls import path
+from .views import (
+    TaskListViewSet,
+    StatusListModuleSet,
+    UsersListModuleSet,
+    WeatherApi,
+)
 from rest_framework.routers import DefaultRouter
 
 app_name = "api-v1"
@@ -8,7 +13,13 @@ router = DefaultRouter()
 router.register("task", TaskListViewSet, basename="task")
 router.register("status", StatusListModuleSet, basename="status")
 router.register("users", UsersListModuleSet, basename="users")
-urlpatterns = router.urls
+
+
+urlpatterns = [
+    path("weather/", WeatherApi.as_view(), name="weather"),
+] + router.urls
+
+
 """urlpatterns = [
     path(
         "task/",

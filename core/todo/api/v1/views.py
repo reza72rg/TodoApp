@@ -2,11 +2,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from todo.models import Task, Status
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+import requests
+from django.http import JsonResponse
+from django.views import View
 from .serializers import Taskserializers, Statusserializers, Usersserializers
 from .pagination import CustomPagination
 from .permissions import IsOwnerOrReadOnly
 from accounts.models import User
+from todo.models import Task, Status
 
 
 class TaskListViewSet(viewsets.ModelViewSet):
@@ -22,6 +27,10 @@ class TaskListViewSet(viewsets.ModelViewSet):
     ordering_fields = ["created_date"]
     pagination_class = CustomPagination
 
+    @method_decorator(cache_page(60 * 5))  # Cache for 5 minutes
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class StatusListModuleSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -33,6 +42,25 @@ class UsersListModuleSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = Usersserializers
     queryset = User.objects.all()
+
+
+class WeatherApi(View):
+    def get(self, request, *args, **kwargs):
+        url = "https://api.openweathermap.org/data/2.5/weather"
+        params = {
+            "q": "Tehran",  # Replace with the desired city name
+            "appid": "23db3c61c5a56bdcb6c098685539fdf8",
+        }
+        response = requests.get(url, params=params)
+        data = response.json()
+
+        return JsonResponse(
+            data
+        )  # Convert data to JsonResponse and return it
+
+    @method_decorator(cache_page(60 * 20))  # Cache for 5 minutes
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 """class TaskListViewSet(viewsets.ViewSet):
