@@ -45,6 +45,14 @@ bash
    
 5. Open the program in your web browser at `http://127.0.0.1:8000`.
 
+6. Build the Docker image by running the following command in the base directory:
+        
+        docker build -t todoapp .
+        
+7. Once the image is built, you need to run the container. Use the following command:
+    
+        docker-compose up --build.
+
 ## API Documentation
 
 The API documentation can be found at `http://127.0.0.1:8000/api/v1/` and `http://127.0.0.1:8000/accounts/api/v1/`, providing details on how to interact with the REST API endpoints.
