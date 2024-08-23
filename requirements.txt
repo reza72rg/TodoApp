@@ -1,5 +1,6 @@
 # general modules
-django >3.2,<3.3
+Django>=4.2,<5
+django-environ>=0.4
 python-decouple
 Pillow
 djangorestframework
@@ -29,3 +30,9 @@ redis
 django-redis
 django-celery-beat
 django-redis
+
+# deployment module
+gunicorn
+
+# For PostgreSQL (uncomment if using PostgreSQL)
+psycopg2-binary
