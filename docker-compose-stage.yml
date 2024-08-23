@@ -17,13 +17,13 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
-      - "5433:5432"
+      - "5434:5432"
 
   backend_todoapp:
     build: .
     container_name: backend_todoapp
     command: gunicorn core.wsgi --bind 0.0.0.0:8000
-    #command: python manage.py make migrations && python manage.py migrate && python manage.py collectstatic --noinput gunicorn core.wsgi --bind 0.0.0.0:8000
+    # command: python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput gunicorn core.wsgi --bind 0.0.0.0:8000
     volumes:
       - ./core:/app
       - static_volume:/app/static
@@ -41,6 +41,7 @@ services:
       - DATABASE_PORT=${DATABASE_PORT}
     depends_on:
       - redis_todoapp
+      - postgresql
 
   nginx:
     image: nginx
@@ -59,6 +60,7 @@ services:
     build: .
     container_name: worker_celery
     command: celery -A core worker --loglevel warning
+    user: "myuser"
     volumes:
       - ./core:/app/
     environment:

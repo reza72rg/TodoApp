@@ -3,6 +3,13 @@ from django.db import models
 # from django.urls import reverse
 
 
+class Status(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 # Create your models here.
 class Task(models.Model):
     # ForeignKey relationship with User model
@@ -38,8 +45,3 @@ class Task(models.Model):
         return self.description[0:5]
 
 
-class Status(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name

@@ -2,8 +2,6 @@ from pathlib import Path
 import os
 import environ
 
-pymysql.install_as_MySQLdb()
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
@@ -19,8 +17,6 @@ DEBUG = env.bool("DEBUG", default=False)  # Handle DEBUG appropriately
 
 # ALLOWED_HOSTS setting
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
-
-
 
 # Application definition
 
@@ -80,11 +76,14 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": env("DATABASE_ENGINE"),
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -160,6 +159,7 @@ EMAIL_HOST_PASSWORD = ""
 # celery configs
 CELERY_BROKER_URL = "redis://redis_todoapp:6379/1"  # Update the hostname to redis_todoapp
 
+
 # caching configs
 CACHES = {
     "default": {
@@ -170,3 +170,5 @@ CACHES = {
         },
     }
 }
+
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
