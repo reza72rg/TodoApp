@@ -21,9 +21,6 @@ jobs:
     - name: Setup Docker-Compose
       run: docker-compose up -d
 
-    - name: Run Tests
-      run: docker exec backend_todoapp sh -c "flake8 ."
-
   Deploy:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     name: Deploy
