@@ -43,7 +43,7 @@ services:
     depends_on:
       - redis_todoapp
       - postgresql
-    mem_limit: 512m  # Set memory limit for the container
+    mem_limit: 1g  # Increase to 1 GB of memory
 
   nginx:
     image: nginx
