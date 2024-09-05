@@ -13,14 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+
+    # Install Docker Compose
+    - name: Install Docker Compose
+      run: sudo apt-get update && sudo apt-get install -y docker-compose
+
     - name: Setup Docker-Compose
       run: docker-compose up -d
-    - name: Run Tests
-      run: docker exec backend sh -c "flake8 && pytest ."
 
-  
+    - name: Run Tests
+      run: docker exec backend_todoapp sh -c "flake8 && pytest ."
+
   Deploy:
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }} 
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     name: Deploy
     needs: Test
     runs-on: ubuntu-latest
