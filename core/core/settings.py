@@ -157,7 +157,9 @@ EMAIL_HOST_PASSWORD = ""
 
 
 # celery configs
-CELERY_BROKER_URL = "redis://redis_todoapp:6379/1"  # Update the hostname to redis_todoapp
+CELERY_BROKER_URL = (
+    "redis://redis_todoapp:6379/1"  # Update the hostname to redis_todoapp
+)
 
 
 # caching configs

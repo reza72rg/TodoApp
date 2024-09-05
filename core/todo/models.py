@@ -43,5 +43,3 @@ class Task(models.Model):
 
     def get_snippet(self):
         return self.description[0:5]
-
-
